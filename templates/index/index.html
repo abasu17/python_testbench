@@ -1,0 +1,164 @@
+{% extends 'layout/layout.html' %}
+
+{% block head %}
+<style>
+	.wall{
+		height:90vh;
+		overflow: hidden;
+    	position: relative;
+	}
+	.frame {
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		right: 0;
+		top: 0;
+		border:0;
+
+	}
+</style>
+{% endblock%}
+
+{% block nav %}
+<ul class="nav navbar-nav">
+	<li class="nav-item"><a href="#" id="home" class="nav-link" onclick="iFrame_render(this.id);">Home</a></li>
+	<li class="nav-item"><a href="#" id="about" class="nav-link" onclick="iFrame_render(this.id);">About</a></li>
+	<li class="nav-item dropdown">
+		<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Services <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<li><a href="#" class="dropdown-item" id="uts" onclick="iFrame_render(this.id);">Unit Testing Suite</a></li>
+		</ul>
+	</li>
+	<li class="nav-item"><a href="#" id="contact" class="nav-link" onclick="iFrame_render(this.id);">Contact</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right ml-auto">
+	<li class="nav-item" style="margin-top:4px;">
+		<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
+		<ul class="dropdown-menu form-wrapper">
+			<li>
+				<form action="" method="post">
+					<p class="hint-text">Sign in with your credentials</p>
+					<div class="form-group">
+						<input type="text" name="inputUserID" class="form-control" placeholder="Username" required="required">
+					</div>
+					<div class="form-group">
+						<input type="password" name="inputPassword" class="form-control" placeholder="Password" required="required">
+					</div>
+					<input type="hidden" name="form" value="loginForm">
+					<input type="submit" class="btn btn-primary btn-block" value="Login">
+					<div class="form-footer">
+						<a href="#">Forgot Your password?</a>
+					</div>
+				</form>
+			</li>
+		</ul>
+	</li>
+	<li class="nav-item">
+		<a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
+		<ul class="dropdown-menu form-wrapper">
+			<li>
+				<form action="" method="post">
+					<p class="hint-text">Fill in this form to create your account!</p>
+					<div class="form-group">
+						<input id="inputFname" name="inputFname" type="text" class="form-control" placeholder="First Name" required="required">
+					</div>
+					<div class="form-group">
+						<input id="inputLname" name="inputLname" type="text" class="form-control" placeholder="Last Name" required="required">
+					</div>
+					<div class="form-group">
+						<input id="inputUserName" name="inputUserName" type="text" class="form-control" placeholder="Username" required="required">
+					</div>
+					<div class="form-group">
+						<input id="inputPassword" name="inputPassword" type="password" class="form-control" placeholder="Password" required="required">
+					</div>
+					<div class="form-group">
+						<input id="inputConfPassword" name="inputConfPassword" type="password" class="form-control" placeholder="Confirm Password" required="required">
+					</div>
+					<div class="form-group">
+						<label class="checkbox-inline"><input type="checkbox" required="required"> I accept that the above information is correct.</a></label>
+					</div>
+					<input type="hidden" name="form" value="registrationForm">
+					<input type="submit" class="btn btn-primary btn-block" value="Sign up">
+				</form>
+			</li>
+		</ul>
+	</li>
+</ul>
+{% endblock %}
+
+{% block body %}
+<div class="wall" style="">
+	<iframe id="body_render" class="frame" src="{{ url_for('home') }}"></iframe>
+</div>
+	{% if err_chk == 1 %}
+		<div class="modal fade show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: block;">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Wrong Credentials</h5>
+			  </div>
+			  <div class="modal-body">
+				You have entered either an incorrect username or an incorrect password. Please provide correct credentials for login or click on forgot password.
+			  </div>
+			  <div class="modal-footer">
+				<a class="btn btn-danger" href="{{ url_for('index') }}" data-dismiss="modal" style="color:#FFFFFF;">Close</a>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<div class="modal-backdrop fade show"></div>
+	{% elif err_chk == 2 %}
+		<div class="modal fade show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: block;">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Successfully registered</h5>
+				  </div>
+				  <div class="modal-body">
+					  Congratulation! now you are a member of BenchPy family. Enjoy the coding.
+				  </div>
+				  <div class="modal-footer">
+					<a class="btn btn-success" href="{{ url_for('index') }}" data-dismiss="modal" style="color:#FFFFFF;">Close</a>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		<div class="modal-backdrop fade show"></div>
+	{% elif err_chk == 3 %}
+		<div class="modal fade show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: block;">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Already Registered</h5>
+			  </div>
+			  <div class="modal-body">
+				You account credentials are already associated with our database. Please try forgot password option in Login menu, if you are not able to recall the password.
+			  </div>
+			  <div class="modal-footer">
+				<a class="btn btn-warning" href="{{ url_for('index') }}" data-dismiss="modal" style="color:#FFFFFF;">Close</a>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<div class="modal-backdrop fade show"></div>
+	{% elif err_chk == 4 %}
+		<div class="modal fade show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: block;">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Confirm Password not matched</h5>
+			  </div>
+			  <div class="modal-body">
+				Password & Confirm Password should be the same. Please follow the indicator, do not submit until it's green.
+			  </div>
+			  <div class="modal-footer">
+				<a class="btn btn-primary" href="{{ url_for('index') }}" data-dismiss="modal" style="color:#FFFFFF;">Close</a>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<div class="modal-backdrop fade show"></div>
+	{% endif %}
+
+<script src="/static/js/password_validation.js"></script>
+{% endblock %}

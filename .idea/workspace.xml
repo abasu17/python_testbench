@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="552cdd65-bfd5-4c32-aebf-6af6cdeef32d" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="python_testbench" />
+  </component>
+  <component name="ProjectId" id="1ZE24uqTtX9s0tAlJBReOvSJL2O" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/user_login" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/user_login" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python_testbench" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.app" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="552cdd65-bfd5-4c32-aebf-6af6cdeef32d" name="Default Changelist" comment="" />
+      <created>1584389745647</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584389745647</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1343" height="175" key="GridCell.Tab.0.bottom" timestamp="1584390345828">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="175" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1584390345828" />
+    <state width="1343" height="175" key="GridCell.Tab.0.center" timestamp="1584390345826">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="175" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1584390345826" />
+    <state width="1343" height="175" key="GridCell.Tab.0.left" timestamp="1584390345825">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="175" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1584390345825" />
+    <state width="1343" height="175" key="GridCell.Tab.0.right" timestamp="1584390345827">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="175" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1584390345827" />
+    <state x="381" y="225" key="com.intellij.ide.util.TipDialog" timestamp="1584389771320">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="381" y="225" key="com.intellij.ide.util.TipDialog/0.27.1366.741@0.27.1366.741" timestamp="1584389771320" />
+    <state x="0" y="27" width="613" height="741" key="find.popup" timestamp="1584734574279">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="0" y="27" width="613" height="741" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1584734574279" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/plugins.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

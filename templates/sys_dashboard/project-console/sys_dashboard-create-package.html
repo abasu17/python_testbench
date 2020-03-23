@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <style>
+        body{
+            background-color: #f8f9fa;
+        }
+
+        .carousel-update{
+            width: 60%;
+            right: 35%;
+            top: 50%;
+            position: absolute;
+            margin-left: 2%;
+            margin-top: 1%;
+            float: left;
+            border: 15px solid #FFFFFF;
+            transform: translateY(-55%);
+            box-shadow: 1px 1px 3px #000000;
+        }
+        .sticky{
+            width: 30%;
+            height : 83vh;
+            right: 4%;
+            top: 50%;
+            position: absolute;
+            margin-left: 2%;
+            margin-top: 1%;
+            float: left;
+            color: #FFFFFF;
+            transform: translateY(-55%);
+            text-shadow: 0px 0px 3px #AAAAAA;
+        }
+
+        .alt-color{
+            color: #6bd8be;
+        }
+        .alt-color:nth-child(1){
+            color: #000000;
+        }
+
+    </style>
+    <script type="text/javascript">
+        function AvoidSpace(event) {
+            var k = event ? event.which : window.event.keyCode;
+            if (k == 32) return false;
+        }
+    </script>
+</head>
+
+<body>
+{% if check_stat == 1: %}
+<div class="alert alert-success alert-dismissible fade show" style="margin-top:2%; width:35%; margin-left:35%;" role="alert">
+    Project has been {{event_flag}}d <strong>successfully!</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% elif check_stat == 0: %}
+<div class="alert alert-danger alert-dismissible fade show" style="margin-top:2%; width:35%; margin-left:35%;" role="alert">
+    <strong>Failed!</strong> to {{event_flag}} the project due to some internal error.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <h1 class="h-1" style="margin:15% auto;">Create<font style="color:#6bd8be"> Package</font><b></b></h1>
+                    <div class="card-body" style="padding:0 1.25rem 1.25rem">
+                        <p class="card-text">Create a new package by clicking on <b>Create</b> button at below.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" data-event="create">Create</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if project_path != None %}
+            {% for key, value in project_path.items(): %}
+            {% if value[1] != None %}
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow" style="box-shadow:0 0 3px #6bd8be;">
+                    <h1 class="h-1" style="margin:15% auto;">
+                        {% for each_word in value[0] | split_dot -%}
+                        <font class="alt-color">
+                            {{ each_word }}
+                        </font>
+                        {%- endfor %}
+                    </h1>
+                    <div class="card-body">
+                        <p class="card-text"><strong>File location: </strong>{{ value[1] }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#exampleModal" data-event="update">Update</button>
+                                <a href="" class="btn btn-sm btn-outline-success" style="text-decoration: none"> Select </a>
+                            </div>
+                            <a href="" class="btn btn-sm btn-danger" style="text-decoration: none" data-toggle="modal" data-target="#confirmationModal" data-event="delete"">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="margin:1rem auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Packages</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="project-creation-form" method="post">
+                    <div class="form-group">
+                        <label for="package-name" class="col-form-label">Package Name</label>
+                        <input type="text" class="form-control required" name="package-name" id="package-name" onkeypress="return AvoidSpace(event)" required>
+                        <small class="form-text text-muted">Please provide extension and do not use any space (e.g example_project.py)</small>
+                        <!--                        <label for="folder-name" class="col-form-label">Folder Name</label>-->
+                        <!--                        <input type="text" class="form-control required" name="folder-name" id="folder-name" onkeypress="return AvoidSpace(event)">-->
+                        <div class="input-group">
+                            <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Separated link</a>
+                                </div>
+                            </div>
+                        </div>
+                        <small class="form-text text-muted">Choose a folder or enter a new folder name where package will be created. Please do not use space. (Optional)</small>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" class="form-control" name="event" id="event-flag">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button id="submit_btn" type="submit" class="btn btn-primary" >Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you wants to delete the project?
+            </div>
+            <form method="post">
+                <div class="modal-footer">
+                    <div class="modal-body">
+                        <input type="checkbox" class="form-check-input" name="remove-all" id="remove-all">
+                        <label class="form-check-label" for="remove-all">Also delete the project folder</label>
+                    </div>
+                    <input type="hidden" name="event" id="del-event-flag">
+                    <input type="hidden" name="project-alias" id="del-project-alias">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var data = button.data('event')
+        var project_title = button.data('title')
+        var project_alias = button.data('alias')
+        var project_description = button.data('desc')
+        var modal = $(this)
+        modal.find('#event-flag').val(data)
+
+        if (data == 'create'){
+            modal.find('.modal-title').text('Create Project')
+            modal.find('#submit_btn').removeClass('btn-warning').addClass('btn-primary')
+            modal.find('#submit_btn').html('Create')
+            modal.find('#alias-name').prop('disabled', false)
+            modal.find('#project-title').val('')
+            modal.find('#alias-name').val('')
+            modal.find('#project-description').val('')
+        }
+        else if (data == 'update'){
+            modal.find('.modal-title').text('Update Project')
+            modal.find('#submit_btn').removeClass('btn-primary').addClass('btn-warning')
+            modal.find('#submit_btn').html('Save')
+            modal.find('#alias-name').prop('disabled', true)
+            modal.find('#project-title').val(project_title)
+            modal.find('#alias-name').val(project_alias)
+            modal.find('#project-description').val(project_description)
+        }
+    });
+
+    $("#submit_btn").on('click', function(){
+        $('#exampleModal').find('#alias-name').prop('disabled', false)
+    });
+
+    $('#confirmationModal').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget)
+
+        var data = button.data('event')
+        var project_alias = button.data('alias')
+
+        var modal = $(this)
+
+        modal.find('#del-event-flag').val(data)
+        modal.find('#del-project-alias').val(project_alias)
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+{% extends 'layout/layout.html' %}
+
+{% block head %}
+<style>
+	#sign_out{
+		color:#DC3545;
+	}
+
+	#sign_out:hover{
+		color:#FFFFFF;
+	}
+
+	.tab-highlight{
+		color:#AAAAAA;
+		transition: background-color 1s, color 1s;
+	}
+
+	.tab-highlight:hover{
+		background-color:#AAAAAA;
+		color:#000000;
+	}
+	.active{
+		background-color:#AAAAAA;
+		color:#000000;
+	}
+	.frame {
+		height: 89%;
+		width: 100%;
+		right: 0;
+		top: 0;
+		border:0;
+	}
+	table{
+		border-collapse:unset;
+	}
+</style>
+<link rel="stylesheet" href="/static/css/sidebar-toggle.css" />
+{% endblock%}
+
+{% block nav %}
+<ul class="nav navbar-nav">
+	<li class="nav-item"><a href="#" id="dashboard" class="nav-link" onclick="iFrame_render(this.id);">Dashboard</a></li>
+	<li class="nav-item"><a href="#" id="configuration" class="nav-link" onclick="iFrame_render(this.id);">Configuration</a></li>
+	<li class="nav-item dropdown">
+		<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Profile <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<li><a href="#" class="dropdown-item" id="profile-customize" onclick="iFrame_render(this.id);">Customize</a></li>
+			<li><a href="#" class="dropdown-item" id="profile-security" onclick="iFrame_render(this.id);">Security</a></li>
+		</ul>
+	</li>
+	<li class="nav-item"><a href="#" id="contact" class="nav-link" onclick="iFrame_render(this.id);">Help</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right ml-auto">
+	<li class="nav-item" style="margin-top:4px;">
+		<a data-toggle="dropdown" class="nav-link dropdown-toggle disabled" href="#">{{ curr_user }}</a>
+	</li>
+	<li class="nav-item">
+		<a id="sign_out" href="{{ url_for('logout') }}" class="btn btn-outline-danger get-started-btn mt-1 mb-1">Sign Out</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block body %}
+<!-- sidebar -->
+	<div id="mySidenav" class="sidenav">
+		<table style="width:100%" id="nav-tab">
+			<tr style="height:7vh; color:#AAAAAA;">
+				<td style="width:5px;"></td>
+				<td style="width:79%;"><b>PROJECT CONSOLE</b></td>
+				<td style=""></td>
+			</tr>
+			<tr class="tab-highlight active" style="height:7vh;">
+				<td style="width:5px; background-color:#ff004b;"></td>
+				<td style="padding-left:10px; width:79%;">Create a project</td>
+				<td style="padding-left:10px; background-color:#ff004b;"><img src="/static/open-iconic/svg/project.svg" style="width:80%; padding:5px;" /></td>
+			</tr>
+			<tr class="tab-highlight" style="height:7vh;">
+				<td style="width:5px; background-color:#3c7bef;"></td>
+				<td style="padding-left:10px; width:79%;">Create a package</td>
+				<td style="padding-left:10px; background-color:#3c7bef;"><img src="/static/open-iconic/svg/grid-two-up.svg" style="width:80%; padding:5px;" /></td>
+			</tr>
+			<tr class="tab-highlight" style="height:7vh;">
+				<td style="width:5px; background-color:#ffc532;"></td>
+				<td style="padding-left:10px; width:79%;">Write source code</td>
+				<td style="padding-left:10px; background-color:#ffc532;"><img src="/static/open-iconic/svg/code.svg" style="width:80%; padding:5px;" /></td>
+			</tr>
+			<tr class="tab-highlight" style="height:7vh;">
+				<td style="width:5px; background-color:#00e84d;"></td>
+				<td style="padding-left:10px; width:79%;">Run test case</td>
+				<td style="padding-left:10px; background-color:#00e84d;"><img src="/static/open-iconic/svg/graph.svg" style="width:80%; padding:5px;" /></td>
+			</tr>
+		</table>
+	</div>
+	<iframe id="body_render" class="frame" src="{{ url_for('dashboard') }}"></iframe>
+
+<script type="text/javascript">
+
+	var btnContainer = document.getElementById("nav-tab");
+	// Get all buttons with class="btn" inside the container
+	var btns = btnContainer.getElementsByClassName("tab-highlight");
+
+	// Loop through the buttons and add the active class to the current/clicked button
+	for (var i = 0; i < btns.length; i++) {
+	  btns[i].addEventListener("click", function() {
+		var current = document.getElementsByClassName("active");
+		current[0].className = current[0].className.replace(" active", "");
+		this.className += " active";
+	  });
+	}
+</script>
+{% endblock %}
