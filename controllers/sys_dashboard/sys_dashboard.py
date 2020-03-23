@@ -4,7 +4,7 @@ from controllers.controller import *
 class ProjectController:
 
     PROJECT_OWNER = None
-
+    PROJECT_PATH = None
 
     def __init__(self, project_owner):
         self.PROJECT_OWNER = project_owner
@@ -101,5 +101,25 @@ class ProjectController:
                                                              ProjectModel.project_alias==project_alias,
                                                              ProjectModel.del_flag == False,
                                                              ProjectModel.status == True).first()
-        list_dir = get_dir(project_path.project_path + "/src")
+        self.PROJECT_PATH = project_path.project_path + "/src"
+        list_dir = get_dir(self.PROJECT_PATH)
         return list_dir
+
+
+    def create_package(self, req):
+
+        if req['folder-name'] == '':
+            if create_pkg(self.PROJECT_PATH +"/"+ req['package-name']):
+                return 1
+        else:
+            new_path = create_folder(self.PROJECT_PATH +"/"+ req['folder-name'])
+            if new_path:
+                if create_pkg(new_path + "/" + req['package-name']):
+                    return 1
+        return 0
+
+    def delete_package(self, req):
+        if delete_pkg(req['package-path']):
+            return 1
+
+        return 0

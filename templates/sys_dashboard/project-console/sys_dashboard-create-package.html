@@ -58,14 +58,14 @@
 <body>
 {% if check_stat == 1: %}
 <div class="alert alert-success alert-dismissible fade show" style="margin-top:2%; width:35%; margin-left:35%;" role="alert">
-    Project has been {{event_flag}}d <strong>successfully!</strong>
+    Package has been {{event_flag}}d <strong>successfully!</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 {% elif check_stat == 0: %}
 <div class="alert alert-danger alert-dismissible fade show" style="margin-top:2%; width:35%; margin-left:35%;" role="alert">
-    <strong>Failed!</strong> to {{event_flag}} the project due to some internal error.
+    <strong>Failed!</strong> to {{event_flag}} the package due to some internal error.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -104,10 +104,10 @@
                         <p class="card-text"><strong>File location: </strong>{{ value[1] }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#exampleModal" data-event="update">Update</button>
-                                <a href="" class="btn btn-sm btn-outline-success" style="text-decoration: none"> Select </a>
+<!--                                <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#exampleModal" data-event="update">Update</button>-->
+                                <a href="" class="btn btn-sm btn-outline-success" style="text-decoration: none"> &nbsp; Edit &nbsp; </a>
                             </div>
-                            <a href="" class="btn btn-sm btn-danger" style="text-decoration: none" data-toggle="modal" data-target="#confirmationModal" data-event="delete"">Delete</a>
+                            <a href="" class="btn btn-sm btn-danger" style="text-decoration: none" data-toggle="modal" data-target="#confirmationModal" data-event="delete" data-path="{{ key }}">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -134,18 +134,19 @@
                         <label for="package-name" class="col-form-label">Package Name</label>
                         <input type="text" class="form-control required" name="package-name" id="package-name" onkeypress="return AvoidSpace(event)" required>
                         <small class="form-text text-muted">Please provide extension and do not use any space (e.g example_project.py)</small>
-                        <!--                        <label for="folder-name" class="col-form-label">Folder Name</label>-->
-                        <!--                        <input type="text" class="form-control required" name="folder-name" id="folder-name" onkeypress="return AvoidSpace(event)">-->
+                        <label for="folder-name" class="col-form-label">Folder Name</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                            <input id="folder-name" name="folder-name" type="text" class="form-control" aria-label="Text input with dropdown button">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Folders</button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div role="separator" class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
+                                    {% if project_path != None %}
+                                    {% for key, value in project_path.items(): %}
+                                    {% if value[1] == None %}
+                                    <a class="dropdown-item" href="#">{{ value[0] }}</a>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -172,16 +173,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you wants to delete the project?
+                Are you sure you wants to delete the package?
             </div>
             <form method="post">
                 <div class="modal-footer">
-                    <div class="modal-body">
-                        <input type="checkbox" class="form-check-input" name="remove-all" id="remove-all">
-                        <label class="form-check-label" for="remove-all">Also delete the project folder</label>
-                    </div>
                     <input type="hidden" name="event" id="del-event-flag">
-                    <input type="hidden" name="project-alias" id="del-project-alias">
+                    <input type="hidden" name="package-path" id="package-path">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-danger">Confirm</button>
                 </div>
@@ -191,37 +188,9 @@
 </div>
 
 <script type="text/javascript">
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var data = button.data('event')
-        var project_title = button.data('title')
-        var project_alias = button.data('alias')
-        var project_description = button.data('desc')
-        var modal = $(this)
-        modal.find('#event-flag').val(data)
-
-        if (data == 'create'){
-            modal.find('.modal-title').text('Create Project')
-            modal.find('#submit_btn').removeClass('btn-warning').addClass('btn-primary')
-            modal.find('#submit_btn').html('Create')
-            modal.find('#alias-name').prop('disabled', false)
-            modal.find('#project-title').val('')
-            modal.find('#alias-name').val('')
-            modal.find('#project-description').val('')
-        }
-        else if (data == 'update'){
-            modal.find('.modal-title').text('Update Project')
-            modal.find('#submit_btn').removeClass('btn-primary').addClass('btn-warning')
-            modal.find('#submit_btn').html('Save')
-            modal.find('#alias-name').prop('disabled', true)
-            modal.find('#project-title').val(project_title)
-            modal.find('#alias-name').val(project_alias)
-            modal.find('#project-description').val(project_description)
-        }
-    });
-
-    $("#submit_btn").on('click', function(){
-        $('#exampleModal').find('#alias-name').prop('disabled', false)
+     $(".dropdown-item").on('click', function(e){
+        var drop_down = $(this)
+        $('#folder-name').val(drop_down.html())
     });
 
     $('#confirmationModal').on('show.bs.modal', function (event) {
@@ -229,12 +198,12 @@
         var button = $(event.relatedTarget)
 
         var data = button.data('event')
-        var project_alias = button.data('alias')
+        var package_path = button.data('path')
 
         var modal = $(this)
 
         modal.find('#del-event-flag').val(data)
-        modal.find('#del-project-alias').val(project_alias)
+        modal.find('#package-path').val(package_path)
     });
 </script>
 </body>

@@ -12,25 +12,30 @@ WORKSPACE_PATH = "./workspace/"
 def uuid(size=32, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
+
 def encrypt_string(hash_string):
     sha_signature = hashlib.sha256(hash_string.encode()).hexdigest()
     return sha_signature
 
+
 def get_time():
     t = time.localtime()
-    return str(t.tm_hour) + ":" + str(t.tm_min) + ":" + str(t.tm_sec) + "  " + str(t.tm_mday) + "-" + str(t.tm_mon) + "-" + str(t.tm_year)
+    return str(t.tm_hour) + ":" + str(t.tm_min) + ":" + str(t.tm_sec) + "  " + str(t.tm_mday) + "-" + str(
+        t.tm_mon) + "-" + str(t.tm_year)
+
 
 def split_space(string):
     return string.strip().split()
+
 
 def split_dot(string):
     return string.replace('.', '%!.').strip().split('%!')
 
 
 def replace_tokens(string, data):
-  if string is not None:
-    string = Environment().from_string(string).render({ 'data': data })
-  return string
+    if string is not None:
+        string = Environment().from_string(string).render({'data': data})
+    return string
 
 
 def remove_workspace(workspace_path):
@@ -47,7 +52,8 @@ def create_workspace(workspace_name):
         env_create = subprocess.Popen(['virtualenv', workspace_path + "/venv", '-p', 'python3'], stdout=subprocess.PIPE)
 
         if env_create.communicate()[0] != b'':
-            env_create_project = subprocess.Popen(['mkdir', workspace_path + "/src", workspace_path + "/testcase"], stdout=subprocess.PIPE)
+            env_create_project = subprocess.Popen(['mkdir', workspace_path + "/src", workspace_path + "/testcase"],
+                                                  stdout=subprocess.PIPE)
             if env_create_project.communicate()[0] == b'':
                 return workspace_path
         else:
@@ -61,6 +67,32 @@ def get_dir(path):
         for d in dirs:
             dict_dir[os.path.join(root, d)] = (d, None)
         for f in files:
-            dict_dir[os.path.join(root, f)] = (f, os.path.join(root, f).split(path+"/")[-1])
+            dict_dir[os.path.join(root, f)] = (f, os.path.join(root, f).split(path + "/")[-1])
 
     return dict_dir
+
+
+def create_pkg(path):
+    pkg_create = subprocess.Popen(['touch', path], stdout=subprocess.PIPE)
+
+    if pkg_create.communicate()[0] == b'':
+        return True
+
+    return False
+
+
+def create_folder(path):
+    env_folder = subprocess.Popen(['mkdir', path], stdout=subprocess.PIPE)
+
+    if env_folder.communicate()[0] == b'':
+        return path
+
+    return None
+
+def delete_pkg(path):
+    delete_package = subprocess.Popen(['rm', path], stdout=subprocess.PIPE)
+
+    if delete_package.communicate()[0] == b'':
+        return True
+
+    return False

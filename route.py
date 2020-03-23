@@ -72,9 +72,21 @@ def dashboard():
 def package(project_alias):
 
     obj_projectController = ProjectController(session['u_id'])
+    check_stat = None
+    event_flag = None
+
     project_path = obj_projectController.fetch_path(project_alias)
 
-    return render_template('sys_dashboard/project-console/sys_dashboard-create-package.html', project_path=project_path)
+    if request.method == 'POST':
+        event_flag = request.form['event']
+        if event_flag == 'create':
+            check_stat = obj_projectController.create_package(request.form)
+            project_path = obj_projectController.fetch_path(project_alias)
+        elif event_flag == 'delete':
+            check_stat = obj_projectController.delete_package(request.form)
+            project_path = obj_projectController.fetch_path(project_alias)
+
+    return render_template('sys_dashboard/project-console/sys_dashboard-create-package.html', project_path=project_path, check_stat=check_stat, event_flag=event_flag )
 
 
 @app.route('/logout')
