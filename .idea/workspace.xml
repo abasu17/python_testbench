@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="552cdd65-bfd5-4c32-aebf-6af6cdeef32d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/sys_dashboard/sys_dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/sys_dashboard/sys_dashboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/route.py" beforeDir="false" afterPath="$PROJECT_DIR$/route.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/sys_dashboard/project-console/sys_dashboard-create-package.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sys_dashboard/project-console/sys_dashboard-create-package.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/file_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/file_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/test_package/file_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/test_package/file_2.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,5 +104,9 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="0" y="27" width="613" height="741" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1584734574279" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1585045435126">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1585045435126" />
   </component>
 </project>

@@ -70,7 +70,6 @@ def dashboard():
 
 @app.route('/package/<project_alias>', methods=['GET', 'POST'])
 def package(project_alias):
-
     obj_projectController = ProjectController(session['u_id'])
     check_stat = None
     event_flag = None
@@ -85,8 +84,18 @@ def package(project_alias):
         elif event_flag == 'delete':
             check_stat = obj_projectController.delete_package(request.form)
             project_path = obj_projectController.fetch_path(project_alias)
+        elif event_flag == 'edit':
+            session['package-path'] = request.form['package-path']
+            return redirect(url_for('source_edit'))
 
-    return render_template('sys_dashboard/project-console/sys_dashboard-create-package.html', project_path=project_path, check_stat=check_stat, event_flag=event_flag )
+    return render_template('sys_dashboard/project-console/sys_dashboard-create-package.html', project_path=project_path,
+                           check_stat=check_stat, event_flag=event_flag)
+
+
+@app.route('/source_edit', methods=['GET', 'POST'])
+def source_edit():
+    package_path = session['package-path']
+    return render_template('sys_dashboard/project-console/sys_dashboard-source-code.html', package_path=package_path)
 
 
 @app.route('/logout')

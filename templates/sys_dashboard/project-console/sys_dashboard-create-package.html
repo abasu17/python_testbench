@@ -94,18 +94,21 @@
             <div class="col-md-4">
                 <div class="card mb-4 box-shadow" style="box-shadow:0 0 3px #6bd8be;">
                     <h1 class="h-1" style="margin:15% auto;">
-                        {% for each_word in value[0] | split_dot -%}
+                        {% for each_word in value[0] | split_dot %}
                         <font class="alt-color">
                             {{ each_word }}
                         </font>
-                        {%- endfor %}
+                        {% endfor %}
                     </h1>
                     <div class="card-body">
                         <p class="card-text"><strong>File location: </strong>{{ value[1] }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-<!--                                <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#exampleModal" data-event="update">Update</button>-->
-                                <a href="" class="btn btn-sm btn-outline-success" style="text-decoration: none"> &nbsp; Edit &nbsp; </a>
+                                <form method="post">
+                                    <input type="hidden" class="form-control" name="event" value="edit">
+                                    <input type="hidden" class="form-control" name="package-path" value="{{ key }}">
+                                    <input type="submit" class="btn btn-sm btn-outline-success" style="text-decoration: none" value="&nbsp; Edit &nbsp;">
+                                </form>
                             </div>
                             <a href="" class="btn btn-sm btn-danger" style="text-decoration: none" data-toggle="modal" data-target="#confirmationModal" data-event="delete" data-path="{{ key }}">Delete</a>
                         </div>
