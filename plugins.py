@@ -89,6 +89,7 @@ def create_folder(path):
 
     return None
 
+
 def delete_pkg(path):
     delete_package = subprocess.Popen(['rm', path], stdout=subprocess.PIPE)
 

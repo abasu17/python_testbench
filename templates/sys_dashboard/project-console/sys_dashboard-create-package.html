@@ -46,6 +46,61 @@
             color: #000000;
         }
 
+        @keyframes successLoad {
+            from {
+                background-color: #28a745;
+                border-color:#28a745;
+            }
+            to {
+                background-color: #0069d9;
+                border-color:#0069d9;
+            }
+        }
+        @keyframes failedLoad {
+            from {
+                background-color: #28a745;
+                border-color:#28a745;
+            }
+            to {
+                background-color: #0069d9;
+                border-color:#0069d9;
+            }
+        }
+        .button-load-success{
+            background-color: #0069d9;
+            animation: failedLoad 3s ease-in-out forwards;
+        }
+        .button-load-failed{
+            background-color: #dc3545;
+            animation: successLoad 3s ease-in-out forwards;
+        }
+
+        .table-fixed tbody {
+            height: 300px;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .table-fixed thead,
+        .table-fixed tbody,
+        .table-fixed tr,
+        .table-fixed td,
+        .table-fixed th {
+            display: block;
+        }
+
+        .table-fixed tbody td,
+        .table-fixed tbody th,
+        .table-fixed thead > tr > th {
+            float: left;
+            position: relative;
+
+            &::after {
+                content: '';
+                clear: both;
+                display: block;
+            }
+        }
     </style>
     <script type="text/javascript">
         function AvoidSpace(event) {
@@ -56,68 +111,67 @@
 </head>
 
 <body>
-{% if check_stat == 1: %}
-<div class="alert alert-success alert-dismissible fade show" style="margin-top:2%; width:35%; margin-left:35%;" role="alert">
-    Package has been {{event_flag}}d <strong>successfully!</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-{% elif check_stat == 0: %}
-<div class="alert alert-danger alert-dismissible fade show" style="margin-top:2%; width:35%; margin-left:35%;" role="alert">
-    <strong>Failed!</strong> to {{event_flag}} the package due to some internal error.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-{% endif %}
 <div class="album py-5 bg-light">
     <div class="container">
-        <div class="row">
-
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <h1 class="h-1" style="margin:15% auto;">Create<font style="color:#6bd8be"> Package</font><b></b></h1>
-                    <div class="card-body" style="padding:0 1.25rem 1.25rem">
-                        <p class="card-text">Create a new package by clicking on <b>Create</b> button at below.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" data-event="create">Create</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="d-flex flex-row-reverse1 justify-content-between p-2">
+            <div style="width:35%;">
+                <h1 class="h-1" style="margin-left:10%;">Package <font style="color:#6bd8be"> Manager </font></h1>
             </div>
-            {% if project_path != None %}
-            {% for key, value in project_path.items(): %}
-            {% if value[1] != None %}
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow" style="box-shadow:0 0 3px #6bd8be;">
-                    <h1 class="h-1" style="margin:15% auto;">
-                        {% for each_word in value[0] | split_dot %}
-                        <font class="alt-color">
-                            {{ each_word }}
-                        </font>
-                        {% endfor %}
-                    </h1>
-                    <div class="card-body">
-                        <p class="card-text"><strong>File location: </strong>{{ value[1] }}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
+            <div>
+            </div>
+            <div>
+                {% if check_stat == 1: %}
+                <button type="button" class="btn btn-sm btn-primary p-2 button-load-success" style="margin-top:5px; margin-right:40px;" data-toggle="modal" data-target="#exampleModal" data-event="create">Create Package</button>
+                {% elif check_stat == 0: %}
+                <button type="button" class="btn btn-sm btn-primary p-2 button-load-failed" style="margin-top:5px; margin-right:40px;" data-toggle="modal" data-target="#exampleModal" data-event="create">Create Package</button>
+                {% else: %}
+                <button type="button" class="btn btn-sm btn-primary p-2" style="margin-top:5px; margin-right:40px;" data-toggle="modal" data-target="#exampleModal" data-event="create">Create Package</button>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-11 mx-auto" >
+                <!-- Fixed header table-->
+                <div class="table-responsive">
+                    <table class="table table-fixed">
+                        <thead style="border-top:0px;">
+                        <tr>
+                            <th scope="col" class="col-4">Package Name</th>
+                            <th scope="col" class="col-4">Package Location</th>
+                            <th scope="col" class="col-4">Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if project_path != None %}
+                        {% for key, value in project_path.items(): %}
+                        {% if value[1] != None %}
+                        <tr>
+                            <td class="col-4">{{ value[0] }}</td>
+                            {% if value[0] != value[1] %}
+                            <td class="col-4">{{ value[1] }}</td>
+                            {% else %}
+                            <td class="col-4">./</td>
+                            {% endif %}
+                            <td class="col-4">
                                 <form method="post">
                                     <input type="hidden" class="form-control" name="event" value="edit">
                                     <input type="hidden" class="form-control" name="package-path" value="{{ key }}">
                                     <input type="submit" class="btn btn-sm btn-outline-success" style="text-decoration: none" value="&nbsp; Edit &nbsp;">
+                                    <a href="" class="btn btn-sm btn-danger" style="text-decoration: none" data-toggle="modal" data-target="#confirmationModal" data-event="delete" data-path="{{ key }}">Delete</a>
                                 </form>
-                            </div>
-                            <a href="" class="btn btn-sm btn-danger" style="text-decoration: none" data-toggle="modal" data-target="#confirmationModal" data-event="delete" data-path="{{ key }}">Delete</a>
-                        </div>
-                    </div>
-                </div>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div><!-- End -->
+
             </div>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
+
+
         </div>
     </div>
 </div>
@@ -156,7 +210,7 @@
                         <small class="form-text text-muted">Choose a folder or enter a new folder name where package will be created. Please do not use space. (Optional)</small>
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" class="form-control" name="event" id="event-flag">
+                        <input type="hidden" class="form-control" name="event" id="event-flag" value="create">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button id="submit_btn" type="submit" class="btn btn-primary" >Create</button>
                     </div>

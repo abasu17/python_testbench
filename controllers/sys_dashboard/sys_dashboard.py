@@ -5,6 +5,7 @@ class ProjectController:
 
     PROJECT_OWNER = None
     PROJECT_PATH = None
+    TESTING_PATH = None
 
     def __init__(self, project_owner):
         self.PROJECT_OWNER = project_owner
@@ -102,6 +103,7 @@ class ProjectController:
                                                              ProjectModel.del_flag == False,
                                                              ProjectModel.status == True).first()
         self.PROJECT_PATH = project_path.project_path + "/src"
+        self.TESTING_PATH = project_path.project_path + "/testcase"
         list_dir = get_dir(self.PROJECT_PATH)
         return list_dir
 
@@ -110,16 +112,19 @@ class ProjectController:
 
         if req['folder-name'] == '':
             if create_pkg(self.PROJECT_PATH +"/"+ req['package-name']):
-                return 1
+                if create_pkg(self.TESTING_PATH +"/"+ req['package-name']):
+                    return 1
         else:
             new_path = create_folder(self.PROJECT_PATH +"/"+ req['folder-name'])
             if new_path:
                 if create_pkg(new_path + "/" + req['package-name']):
-                    return 1
+                    if create_pkg(self.TESTING_PATH + "/" + req['package-name']):
+                        return 1
         return 0
 
     def delete_package(self, req):
         if delete_pkg(req['package-path']):
-            return 1
+            if delete_pkg(req['package-path'].replace('/src/', '/unittest/')):
+                return 1
 
         return 0
