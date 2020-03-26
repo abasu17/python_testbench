@@ -72,8 +72,18 @@ def get_dir(path):
     return dict_dir
 
 
-def create_pkg(path):
-    pkg_create = subprocess.Popen(['touch', path], stdout=subprocess.PIPE)
+def create_pkg(path, type="package"):
+
+    file_content = "import sys\nsys.path.append('../')\n\n" + "from src." + path.split("/")[-1].replace(".py", "") + " import *"
+
+    if type == "package":
+        pkg_create = subprocess.Popen(['touch', path], stdout=subprocess.PIPE)
+    else:
+        pkg_create = subprocess.Popen(['touch', path], stdout=subprocess.PIPE)
+        test_file = open(path, "a")
+        test_file.write(file_content)
+        test_file.close()
+
 
     if pkg_create.communicate()[0] == b'':
         return True
@@ -97,3 +107,19 @@ def delete_pkg(path):
         return True
 
     return False
+
+def read_file(path):
+    file_open = open(path, "r")
+    return file_open.read()
+
+
+def write_file(path, data):
+    try:
+        file_open = open(path, "w")
+        file_open.write(data)
+        file_open.close
+
+    except:
+        return False
+
+    return True

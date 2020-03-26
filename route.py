@@ -86,6 +86,7 @@ def package(project_alias):
             project_path = obj_projectController.fetch_path(project_alias)
         elif event_flag == 'edit':
             session['package-path'] = request.form['package-path']
+            session['package-name'] = request.form['package-name']
             return redirect(url_for('source_edit'))
 
     return render_template('sys_dashboard/project-console/sys_dashboard-create-package.html', project_path=project_path,
@@ -95,7 +96,11 @@ def package(project_alias):
 @app.route('/source_edit', methods=['GET', 'POST'])
 def source_edit():
     package_path = session['package-path']
-    return render_template('sys_dashboard/project-console/sys_dashboard-source-code.html', package_path=package_path)
+    package_name = session['package-name']
+    obj_projectController = ProjectController(session['u_id'])
+    event_data = obj_projectController.source_code_process(request.form, package_path)
+    source_data = obj_projectController.read_package(package_path)
+    return render_template('sys_dashboard/project-console/sys_dashboard-source-code.html', package_name=package_name, source_data=source_data)
 
 
 @app.route('/logout')

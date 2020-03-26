@@ -53,20 +53,19 @@
         #editor_test, #editor_source {
             position: relative;
             width: 49%;
-            height: 65vh;
+            height: 80vh;
             float:left;
             margin-right: 10px;
         }
 
         .editor-tab{
             position:absolute;
-            background-color: #272822;
+            background-color: #2f3129;
             color: #AAAAAA;
             width: 10%;
             text-align: center;
             border-top-right-radius: 10px;
             border-top-left-radius: 10px;
-            margin-left:3%;
         }
     </style>
     <script type="text/javascript">
@@ -93,35 +92,28 @@
     </button>
 </div>
 {% endif %}
-<div class="album py-2 bg-light">
+<div class="album py-3 bg-light">
     <div class="container">
-        <div>
-            <h1 class="h-1" style="margin-bottom:1% auto;">Code<font style="color:#6bd8be"> Editor</font><b></b></h1>
-            <form method="post" style="width:100%;">
-                <div class="input-group">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><B>Package Name</B></span>
-                        </div>
-                        <input type="text" value="{{package_name}}" class="form-control" id="basic-url" aria-describedby="basic-addon3" readonly>
-                        <input type="hidden" id="source-code" name="source_code" value="" >
-                        <input type="hidden" id="event" name="event" value="" >
-                        <button type="submit" id="btn-generate" class="btn btn-info" data-event="generate" style="margin-left:10px;">&nbsp; Generate &nbsp;</button>
-                        <button type="submit" id="btn-execute" class="btn btn-primary" data-event="execute" style="margin-left:10px;">&nbsp; Execute &nbsp;</button>
-                        <button type="submit" id="btn-validate" class="btn btn-warning" data-event="validate" style="margin-left:10px;">&nbsp; Validate &nbsp;</button>
-                        <button type="submit" id="btn-save" class="btn btn-success" data-event="save" style="margin-left:10px;">&nbsp; Save &nbsp;</button>
-                    </div>
-                </div>
-            </form>
+        <div class="row">
+<!--            <div class="input-group">-->
+<!--                <div class="input-group mb-3">-->
+<!--                    <div class="input-group-prepend">-->
+<!--                        <span class="input-group-text">Package Name</span>-->
+<!--                    </div>-->
+<!--                    <input type="text" value="{{package_path}}" class="form-control" id="basic-url" aria-describedby="basic-addon3" readonly>-->
+<!--                    <button type="button" class="btn btn-success" style="margin-left:10px;">&nbsp; Save &nbsp;</button>-->
+<!--                    <button type="button" class="btn btn-warning" style="margin-left:10px;">&nbsp; Execute &nbsp;</button>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
-        <div class="form-group p-2" style="background-color:#2f3129; height:75vh; border:0px solid black; padding-left:2.5%;">
-            <div style="background-color:#111111;">
+        <div class="form-group p-2" style="height:90vh; border:0px solid black; padding-left:2.5%;">
+            <div>
                 <label for="editor_source" class="col-form-label editor-tab" >Source Code</label>
-                <div id="editor_source" class="p-1" style="margin-top:35px;">{{source_data["package_content"]}}</div>
+                <div id="editor_source" class="p-1" style="margin-top:35px;">print("Hello World")</div>
             </div>
             <div>
                 <label for="editor_test" class="col-form-label editor-tab" >Test Case</label>
-                <div id="editor_test" class="p-1" style="margin-top:35px;">{{source_data["test_content"]}}</div>
+                <div id="editor_test" class="p-1" style="margin-top:35px;">print("Hello World")</div>
             </div>
         </div>
     </div>
@@ -244,14 +236,6 @@
 
     editor_test.setTheme("ace/theme/monokai");
     editor_test.session.setMode("ace/mode/python");
-
-    $('.btn').on('click', function(){
-        var button = $(this);
-        var event = button.data('event');
-        var data = editor_source.getValue();
-        $("#event").val(event);
-        $("#source-code").val(data);
-    });
 </script>
 </body>
 </html>

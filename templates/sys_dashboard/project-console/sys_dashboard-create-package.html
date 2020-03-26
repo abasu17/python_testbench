@@ -76,7 +76,7 @@
         }
 
         .table-fixed tbody {
-            height: 300px;
+            height: 320px;
             overflow-y: auto;
             width: 100%;
         }
@@ -88,7 +88,10 @@
         .table-fixed th {
             display: block;
         }
-
+        th{
+            background-color:#111111;
+            color:#f8f9fa;
+        }
         .table-fixed tbody td,
         .table-fixed tbody th,
         .table-fixed thead > tr > th {
@@ -156,6 +159,7 @@
                             <td class="col-4">
                                 <form method="post">
                                     <input type="hidden" class="form-control" name="event" value="edit">
+                                    <input type="hidden" class="form-control" name="package-name" value="{{ value[1] }}">
                                     <input type="hidden" class="form-control" name="package-path" value="{{ key }}">
                                     <input type="submit" class="btn btn-sm btn-outline-success" style="text-decoration: none" value="&nbsp; Edit &nbsp;">
                                     <a href="" class="btn btn-sm btn-danger" style="text-decoration: none" data-toggle="modal" data-target="#confirmationModal" data-event="delete" data-path="{{ key }}">Delete</a>
@@ -167,11 +171,9 @@
                         {% endif %}
                         </tbody>
                     </table>
-                </div><!-- End -->
-
+                </div>
+                <!-- End -->
             </div>
-
-
         </div>
     </div>
 </div>
