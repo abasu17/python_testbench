@@ -3,28 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="552cdd65-bfd5-4c32-aebf-6af6cdeef32d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analyzer/analyze.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/sys_dashboard/sys_dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/sys_dashboard/sys_dashboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route.py" beforeDir="false" afterPath="$PROJECT_DIR$/route.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzer/analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer/analyzer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/sidebar-toggle.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/sidebar-toggle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sys_dashboard/project-console/sys_dashboard-create-package.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sys_dashboard/project-console/sys_dashboard-create-package.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sys_dashboard/project-console/sys_dashboard-create-project.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sys_dashboard/project-console/sys_dashboard-create-project.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/sys_dashboard/project-console/sys_dashboard-source-code.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sys_dashboard/project-console/sys_dashboard-source-code.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/sys_dashboard/sys_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sys_dashboard/sys_dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/test_file.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/test_file_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/test_file_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/test_file_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/test_file_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/test_file_4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/test_file_5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/src/test_file_6.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/testcase/test_file.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/testcase/test_file_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/testcase/test_file_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/testcase/test_file_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/testcase/test_file_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/testcase/test_file_4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/testcase/test_file_5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/workspace/KV2IGI4WWB3ZAE26ZHTZBZ3WLLHVZL73/testcase/test_file_6.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

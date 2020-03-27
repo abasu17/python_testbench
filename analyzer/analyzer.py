@@ -37,10 +37,10 @@ def analyze_functions(path):
 
 def function_builder(data_list, path):
 
-    string_build = str()
+    string_build = str("import sys\nsys.path.append('../')\n\n" + "import pytest\nfrom src." + path.split("/")[-1].replace(".py", "") + " import *\n\n\n")
 
     for each in data_list:
-        string_build += ("import sys\nsys.path.append('../')\n\n" + "import pytest\nfrom src." + path.split("/")[-1].replace(".py", "") + " import *\n\n\n"+
+        string_build += (
             '# testcase for ' + each['function_name'] + "\n"
             'def test_' + each['function_name'] + "():\n\n\t" +
             '# replace with value\n\t' +
