@@ -1,0 +1,21 @@
+.bottomnav {
+    height: 10%;
+    width: 85%;
+    position: absolute;
+    z-index: 10;
+    top: 90%;
+    left: 8%;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 1%;
+    box-shadow: 1px 0px 2px #888;
+    border-top-right-radius : 50px;
+    border-top-left-radius : 50px;
+    overflow-y:hidden;
+}
+
+.bottomnav:hover{
+    height: 60%;
+    top: 40%;
+}

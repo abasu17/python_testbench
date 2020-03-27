@@ -8,6 +8,7 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join('..', '')))
 
+from analyzer.analyzer import *
 from models.model import *
 
 from controllers.index.index import *

@@ -124,15 +124,24 @@ class ProjectController:
 
         return 0
 
+
     def read_package(self, path):
         package_content = read_file(path)
         test_content = read_file(path.replace("/src/", '/testcase/'))
 
         return {"package_content": package_content, "test_content": test_content}
 
+
     def source_code_process(self, req, path):
         if req['event'] == "generate":
-            if not write_file(path, req['source_code']):
-                return False
+            if write_file(path, req['source_code']):
+                if write_file(path.replace('/src/', '/testcase/'), process_analyze(path)):
+                    return True
+        elif req['event'] == "save":
+            if write_file(path, req["source_code"]):
+                if write_file(path.replace('/src/', '/testcase/'), req["test_case"]):
+                    return True
+        return False
 
-        return True
+    def testcase_execute(self, path):
+        return exe_testcase(path.replace('/src/', '/testcase/'))

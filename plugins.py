@@ -2,7 +2,7 @@ import string
 import random
 import hashlib
 import time
-import os
+import os, sys
 import subprocess
 from jinja2 import Environment
 
@@ -123,3 +123,13 @@ def write_file(path, data):
         return False
 
     return True
+
+
+def exe_testcase(path):
+
+    c_path = "/".join(path.split("/")[:-1])
+    file_name = path.split("/")[-1]
+    os.chdir(c_path)
+    execution = subprocess.Popen(['pytest', '-q', file_name], stdout=subprocess.PIPE)
+
+    return execution.communicate()[0]

@@ -98,9 +98,16 @@ def source_edit():
     package_path = session['package-path']
     package_name = session['package-name']
     obj_projectController = ProjectController(session['u_id'])
-    event_data = obj_projectController.source_code_process(request.form, package_path)
+    event_data = b''
+
+    if request.method == 'POST':
+        if request.form["event"] != "execute":
+            event_data = bytes(obj_projectController.source_code_process(request.form, package_path))
+        else:
+            event_data = obj_projectController.testcase_execute(package_path)
+
     source_data = obj_projectController.read_package(package_path)
-    return render_template('sys_dashboard/project-console/sys_dashboard-source-code.html', package_name=package_name, source_data=source_data)
+    return render_template('sys_dashboard/project-console/sys_dashboard-source-code.html', package_name=package_name, source_data=source_data, event_data=event_data.decode("utf-8").split("\n"))
 
 
 @app.route('/logout')
